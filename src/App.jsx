@@ -177,7 +177,16 @@ function MessageBubble({ msg }) {
             borderRadius: "4px 18px 18px 18px",
             padding: "12px 14px",
             fontSize: 14, lineHeight: 1.75,
-            color: "#cccce0", whiteSpace: "pre-wrap",
+            color: "#cccce0",
+            }}
+dangerouslySetInnerHTML={{
+  __html: msg.text
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*(.*?)\*/g, "<em>$1</em>")
+    .replace(/`(.*?)`/g, "<code style='background:#ffffff15;padding:2px 6px;border-radius:4px'>$1</code>")
+    .replace(/\n/g, "<br/>")
+}}
+/>
           }}>{msg.text}</div>
         </div>
       </div>
