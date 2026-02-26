@@ -54,17 +54,27 @@ Rules:
 - No explanation, just the JSON array.`;
 
 async function callClaude(system, userMsg) {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY?.trim();
-  if (!apiKey) throw new Error("Missing VITE_GEMINI_API_KEY");
+  const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY?.trim();
+  if (!apiKey) throw new Error("Missing API Key");
 
-  const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
-    systemInstruction: system,
+  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: "google/gemini-2.0-flash-exp:free",
+      messages: [
+        { role: "system", content: system },
+        { role: "user", content: userMsg },
+      ],
+      max_tokens: 1000,
+    }),
   });
 
-  const result = await model.generateContent(userMsg);
-  return result.response.text();
+  const data = await res.json();
+  return data.choices[0].message.content;
 }
 
 async function routeQuestion(question) {
