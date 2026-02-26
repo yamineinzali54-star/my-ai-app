@@ -74,6 +74,9 @@ async function callClaude(system, userMsg) {
   });
 
   const data = await res.json();
+  if (!data.choices || !data.choices[0]) {
+    throw new Error(data.error?.message || JSON.stringify(data));
+  }
   return data.choices[0].message.content;
 }
 
