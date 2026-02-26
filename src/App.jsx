@@ -182,10 +182,16 @@ function MessageBubble({ msg }) {
             }}
             dangerouslySetInnerHTML={{
               __html: msg.text
+                // Python Code Block တွေကို ပြင်ဆင်ခြင်း
+                .replace(/```python\n([\s\S]*?)```/g, "<pre style='background:#000;color:#0f0;padding:10px;border-radius:5px;font-family:monospace;'><code>$1</code></pre>")
+                // စာလုံးအမည်း (Bold) တင်ခြင်း
                 .replace(/\*\*\*(.*?)\*\*\*/g, "<strong>$1</strong>")
                 .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                // စာလုံးစောင်း (Italic) တင်ခြင်း
                 .replace(/\*(.*?)\*/g, "<em>$1</em>")
+                // Inline Code များ
                 .replace(/`(.*?)`/g, "<code style='background:#ffffff15;padding:2px 6px;border-radius:4px'>$1</code>")
+                // စာကြောင်းအသစ် ဆင်းခြင်း
                 .replace(/\n/g, "<br/>")
             }}
           />
