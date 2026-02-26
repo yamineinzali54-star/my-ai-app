@@ -54,17 +54,17 @@ Rules:
 - No explanation, just the JSON array.`;
 
 async function callClaude(system, userMsg) {
-  const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY?.trim();
-  if (!apiKey) throw new Error("Missing API Key");
+  const apiKey = import.meta.env.VITE_GROQ_API_KEY?.trim();
+  if (!apiKey) throw new Error("Missing VITE_GROQ_API_KEY");
 
-  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "mistralai/mistral-7b-instruct:free",
+      model: "llama-3.1-8b-instant",
       messages: [
         { role: "system", content: system },
         { role: "user", content: userMsg },
