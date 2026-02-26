@@ -172,22 +172,23 @@ function MessageBubble({ msg }) {
             <span style={{ fontSize: 11, color: "#3a3a5a" }}>{agent.mmName}</span>
             <span style={{ fontSize: 11, color: "#3a3a5a", marginLeft: "auto" }}>{msg.elapsed}s</span>
           </div>
-          <div style={{
-            background: "#13141f", border: "1px solid #ffffff08",
-            borderRadius: "4px 18px 18px 18px",
-            padding: "12px 14px",
-            fontSize: 14, lineHeight: 1.75,
-            color: "#cccce0",
+          <div 
+            style={{
+              background: "#13141f", border: "1px solid #ffffff08",
+              borderRadius: "4px 18px 18px 18px",
+              padding: "12px 14px",
+              fontSize: 14, lineHeight: 1.75,
+              color: "#cccce0",
             }}
-dangerouslySetInnerHTML={{
-  __html: msg.text
-    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-    .replace(/\*(.*?)\*/g, "<em>$1</em>")
-    .replace(/`(.*?)`/g, "<code style='background:#ffffff15;padding:2px 6px;border-radius:4px'>$1</code>")
-    .replace(/\n/g, "<br/>")
-}}
-/>
-          }}>{msg.text}</div>
+            dangerouslySetInnerHTML={{
+              __html: msg.text
+                .replace(/\*\*\*(.*?)\*\*\*/g, "<strong>$1</strong>")
+                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                .replace(/\*(.*?)\*/g, "<em>$1</em>")
+                .replace(/`(.*?)`/g, "<code style='background:#ffffff15;padding:2px 6px;border-radius:4px'>$1</code>")
+                .replace(/\n/g, "<br/>")
+            }}
+          />
         </div>
       </div>
     );
