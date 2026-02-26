@@ -64,7 +64,7 @@ async function callClaude(system, userMsg) {
       "Authorization": `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "google/gemini-2.0-flash-exp:free",
+      model: "meta-llama/llama-3.1-8b-instruct:free",
       messages: [
         { role: "system", content: system },
         { role: "user", content: userMsg },
