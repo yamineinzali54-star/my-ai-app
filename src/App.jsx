@@ -197,12 +197,14 @@ function MessageBubble({ msg }) {
 }}
 dangerouslySetInnerHTML={{
   __html: msg.text
-    .replace(/```[\w]*\n?([\s\S]*?)```/g, "<pre style='background:#0a0a12;padding:12px;border-radius:8px;overflow-x:auto;font-size:12px'>$1</pre>")
-    .replace(/`(.*?)`/g, "<code style='background:#ffffff15;padding:2px 6px;border-radius:4px;font-family:monospace'>$1</code>")
-    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/```[\w]*\n?([\s\S]*?)```/g, "<pre style='background:#0a0a12;padding:12px;border-radius:8px;overflow-x:auto;font-size:12px;margin:8px 0'>$1</pre>")
+    .replace(/`(.*?)`/g, "<code style='background:#ffffff15;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:12px'>$1</code>")
+    .replace(/\*\*(.*?)\*\*/g, "<strong style='color:#eeeeff'>$1</strong>")
     .replace(/\*(.*?)\*/g, "<em>$1</em>")
-    .replace(/^### (.*?)$/gm, "<strong style='font-size:14px;color:#eeeeff'>$1</strong>")
-    .replace(/^- (.*?)$/gm, "• $1")
+    .replace(/^#{1,3} (.*?)$/gm, "<strong style='font-size:14px;color:#eeeeff;display:block;margin:8px 0'>$1</strong>")
+    .replace(/^[•\-\*] (.*?)$/gm, "<div style='margin:3px 0'>• $1</div>")
+    .replace(/❌(.*?)$/gm, "<div style='color:#ff6b6b;margin:4px 0'>❌$1</div>")
+    .replace(/✅(.*?)$/gm, "<div style='color:#43e97b;margin:4px 0'>✅$1</div>")
     .replace(/\n/g, "<br/>")
 }}
 />
