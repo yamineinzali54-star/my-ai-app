@@ -64,7 +64,7 @@ async function callClaude(system, userMsg) {
       "Authorization": `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "llama-3.1-8b-instant",
+      model: "llama3-70b-8192",
       messages: [
         { role: "system", content: system },
         { role: "user", content: userMsg },
