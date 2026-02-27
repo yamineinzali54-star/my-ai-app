@@ -179,22 +179,18 @@ function MessageBubble({ msg }) {
               padding: "12px 14px",
               fontSize: 14, lineHeight: 1.75,
               color: "#cccce0",
-            }}
-            dangerouslySetInnerHTML={{
-              __html: msg.text
-                // Python Code Block တွေကို ပြင်ဆင်ခြင်း
-                .replace(/```python\n([\s\S]*?)```/g, "<pre style='background:#000;color:#0f0;padding:10px;border-radius:5px;font-family:monospace;'><code>$1</code></pre>")
-                // စာလုံးအမည်း (Bold) တင်ခြင်း
-                .replace(/\*\*\*(.*?)\*\*\*/g, "<strong>$1</strong>")
-                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-                // စာလုံးစောင်း (Italic) တင်ခြင်း
-                .replace(/\*(.*?)\*/g, "<em>$1</em>")
-                // Inline Code များ
-                .replace(/`(.*?)`/g, "<code style='background:#ffffff15;padding:2px 6px;border-radius:4px'>$1</code>")
-                // စာကြောင်းအသစ် ဆင်းခြင်း
-                .replace(/\n/g, "<br/>")
-            }}
-          />
+}}
+dangerouslySetInnerHTML={{
+  __html: msg.text
+    .replace(/```[\w]*\n?([\s\S]*?)```/g, "<pre style='background:#0a0a12;padding:12px;border-radius:8px;overflow-x:auto;font-size:12px'>$1</pre>")
+    .replace(/`(.*?)`/g, "<code style='background:#ffffff15;padding:2px 6px;border-radius:4px;font-family:monospace'>$1</code>")
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*(.*?)\*/g, "<em>$1</em>")
+    .replace(/^### (.*?)$/gm, "<strong style='font-size:14px;color:#eeeeff'>$1</strong>")
+    .replace(/^- (.*?)$/gm, "• $1")
+    .replace(/\n/g, "<br/>")
+}}
+/>
         </div>
       </div>
     );
